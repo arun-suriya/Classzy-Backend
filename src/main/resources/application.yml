@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: classzy-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/centram_classzy}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:root123}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate          # schema is owned by Flyway migrations
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 6MB
+      max-request-size: 7MB
+
+classzy:
+  jwt:
+    # Must be at least 32 characters. Override with the JWT_SECRET environment variable in every real environment.
+    secret: ${JWT_SECRET:dev-only-secret-change-me-please-0123456789}
+    expiry-minutes: 480
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+  seed:
+    # Created on first start when the users table is empty. Change these for any shared environment.
+    institution-name: Demo School
+    super-admin-email: ${SEED_SUPER_ADMIN_EMAIL:superadmin@classzy.local}
+    super-admin-password: ${SEED_SUPER_ADMIN_PASSWORD:Admin@123}
+    institution-admin-email: ${SEED_INSTITUTION_ADMIN_EMAIL:admin@demo.school}
+    institution-admin-password: ${SEED_INSTITUTION_ADMIN_PASSWORD:Admin@123}

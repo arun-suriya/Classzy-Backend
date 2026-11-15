@@ -1,0 +1,15 @@
+# Optional: start a local PostgreSQL without installing it.  Run:  docker compose up -d
+services:
+  postgres:
+    image: postgres:16
+    container_name: classzy-db
+    environment:
+      POSTGRES_DB: classzy
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - classzy-data:/var/lib/postgresql/data
+volumes:
+  classzy-data:
